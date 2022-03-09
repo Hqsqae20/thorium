@@ -10,8 +10,9 @@ let MDwear = function (req, res, next) {
 
     let decodedToken = jwt.verify(token, "functionup-thorium");
 
-    if (!decodedToken){
-        return res.send({ status: false, msg: "token is invalid" });
+    if(decodedToken.userId!==req.params.userId)
+    {
+        return res.send({msg:" you must have to login first"})
     }
     next()
        

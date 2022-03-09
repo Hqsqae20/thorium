@@ -64,6 +64,18 @@ const deleteuser = async function (req, res) {
 
 }
 
+const createpost=async function(req,res){
+  let userId=req.params.userId
+  let user =await userModel.findById(userId)
+  let message=req.body
+  let updatedPosts=user.posts
+  updatedPosts.push(message)
+  let updatedUser = await userModel.findOneAndUpdate({_id: user._id},{posts: updatedPosts}, {new: true})
+    return res.send({status: true, data: updatedUser})
+
+
+}
+
 
 
 
@@ -72,3 +84,4 @@ module.exports.getUserData = getUserData;
 module.exports.updateUser = updateUser;
 module.exports.loginUser = loginUser;
 module.exports.deleteuser = deleteuser;
+module.exports.createpost = createpost;
